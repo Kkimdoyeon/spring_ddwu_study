@@ -11,11 +11,11 @@ public class SpringConfig {
 
     @Bean
     public MemberService memberService() {
-        return new MemberService(memberRepository());
+        return new MemberService((MemberRepository) memberRepository());
     }
 
     @Bean
-    public MemberService memberRepository() {
+    public MemoryMemberRepository memberRepository() {
         return new MemoryMemberRepository();
     }
 }
