@@ -24,12 +24,17 @@ public class MemberService {
     @Transactional
     /** 회원가입 */
     public Long join(Member member) {
-        //같은 이름이 있는 중복 회원X
-        //command ALT v 하면 자동완성..
-        validateDuplicateMember(member);
+        long start = System.currentTimeMillis();
+        try{
+            validateDuplicateMember(member);
+            memberRepository.save(member);
+            return member.getId();
+        } finally {
+            long finish = System.currentTimeMillis();
+            long timeMs = finish - start;
+            System.out.println("join = " + timeMs + "ms");
+        }
 
-        memberRepository.save(member);
-        return member.getId();
     }
 
     private void validateDuplicateMember(Member member) {
