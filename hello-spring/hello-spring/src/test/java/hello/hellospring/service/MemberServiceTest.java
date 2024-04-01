@@ -1,7 +1,10 @@
 package hello.hellospring.service;
 
 import hello.hellospring.domain.Member;
+import hello.hellospring.repository.MemoryMemberRepository;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
@@ -33,11 +36,11 @@ class MemberServiceTest {
         member.setName("hello");
 
         //when: 이걸 실행했을 때
-        Loong saveId = memberService.join(member);
+        Long saveId = memberService.join(member);
 
         //then: 결과가 이렇게 나와야 해
         Member findMember = memberService.findOne(saveId).getId();
-        Assertions.assertThat(member.getName()).isEqualTo(findMember.getName());
+        assertThat(member.getName()).isEqualTo(findMember.getName());
     }
 
     @Test

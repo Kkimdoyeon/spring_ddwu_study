@@ -7,7 +7,7 @@ import hello.hellospring.repository.MemoryMemberRepository;
 import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @Service //@Service 안에 @Component가 내포되어있음
@@ -21,6 +21,7 @@ public class MemberService {
         this.memberRepository = memberRepository;
     }
 
+    @Transactional
     /** 회원가입 */
     public Long join(Member member) {
         //같은 이름이 있는 중복 회원X
